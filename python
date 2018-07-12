@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import numpy as np
+
+import pandas as pd
+file = "exp2.xlsx"
+exp2 =pd.ExcelFile(file)
+dfexp2 = exp2.parse("Sheet1")
+
+w = 0.55    # bar width
+x = [1, 2] # bar x coordinates
+colors = ["darkblue", "red"]    # colors
+#y = [np.random.random(30) * 2 + 5,       # data series
+#    np.random.random(10) * 3 + 8]
+
+y = [dfexp2["Ctr"],
+dfexp2.iloc[0:8,1]]
+
+fig, ax = plt.subplots()
+ax.bar(x,
+       height=[np.mean(yi) for yi in y],
+       yerr=[np.std(yi)/np.sqrt(len(y)) for yi in y],    # error bars
+       capsize=12, # error bar cap width in points
+       width=w,    # bar width
+       tick_label=["Pax6+/-", "Pax6-/-"],
+       color=[(0,0,0,0),(0,0,0,0)], # face color transparent
+       edgecolor=colors,
+       linewidth = 3.5,
+       
+for i in range(len(x)):
+    # distribute scatter randomly across whole width of bar
+    ax.scatter(x[i] + np.random.random(y[i].size) * w - w / 2, y[i], color=colors[i])
+
+plt.ylabel("Capacitance (pF)", fontweight='bold', fontsize=13)
+plt.box(on=None)
+plt.show()
