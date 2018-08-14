@@ -30,6 +30,6 @@ for i in range(len(x)):
     # distribute scatter randomly across whole width of bar
     ax.scatter(x[i] + np.random.random(y[i].size) * w - w / 2, y[i], color=colors[i])
 
-plt.ylabel("Capacitance (pF)", fontweight='bold', fontsize=13)
+plt.ylabel("Capacitance (pF)", fontweight='bold', fontsize=16)
 plt.box(on=None)
 plt.show()
